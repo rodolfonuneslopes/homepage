@@ -1,2 +1,6 @@
 # Implementation docs
 implementation-docs/*
+
+# Dependencies & build output
+node_modules/
+dist/

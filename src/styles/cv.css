@@ -1,0 +1,155 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/InterVariable-Italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* The CV is a document: always light, on screen and in print, so the PDF and
+   the page are the same artifact. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #eceef1;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #1a1d21;
+}
+
+/* Screen: an A4-proportioned sheet whose padding mirrors the @page margins,
+   so what you see is what the PDF paginates. */
+.page {
+  max-width: 210mm;
+  margin: 2rem auto;
+  padding: 18mm 16mm;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+}
+
+h1 {
+  margin: 0 0 0.2rem;
+  font-size: 21pt;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Contact line: the first paragraph after the name */
+h1 + p {
+  margin: 0 0 1.4rem;
+  color: #5c6570;
+  font-size: 9.5pt;
+}
+
+h2 {
+  margin: 1.6rem 0 0.7rem;
+  font-size: 12pt;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #d5d9de;
+  padding-bottom: 0.25rem;
+}
+
+h3 {
+  margin: 1rem 0 0.1rem;
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+/* Date/location line: the emphasized paragraph right after a job title */
+h3 + p > em:only-child,
+h3 + p em {
+  font-style: normal;
+  color: #5c6570;
+  font-size: 9.5pt;
+}
+
+h3 + p {
+  margin: 0 0 0.4rem;
+}
+
+p { margin: 0.4rem 0; }
+
+ul {
+  margin: 0.3rem 0 0.6rem;
+  padding-left: 1.2rem;
+}
+
+li { margin: 0.2rem 0; }
+
+a {
+  color: #0b62d6;
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.entry { break-inside: avoid; }
+
+.download-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.55rem 1.1rem;
+  background: #0b62d6;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 10pt;
+  font-weight: 550;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.download-btn:hover {
+  background: #0a56bc;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .page {
+    margin: 0;
+    padding: 10mm 6mm;
+    box-shadow: none;
+  }
+
+  .download-btn {
+    position: static;
+    display: inline-block;
+    margin: 0.75rem;
+  }
+}
+
+/* Print: @page owns the margins; the sheet dissolves into the paper. */
+@page {
+  size: A4;
+  margin: 18mm 16mm;
+}
+
+@media print {
+  body { background: #ffffff; }
+
+  .page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .no-print { display: none; }
+
+  h1, h2, h3 { break-after: avoid; }
+
+  a { color: inherit; }
+}

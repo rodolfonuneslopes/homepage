@@ -1,0 +1,14 @@
+{
+  "name": "homepage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "pdf": "node scripts/pdf.mjs",
+    "build:all": "npm run build && npm run pdf"
+  },
+  "devDependencies": {
+    "markdown-it": "^14.3.0",
+    "puppeteer": "^25.3.0"
+  }
+}
