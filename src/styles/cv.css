@@ -1,46 +1,109 @@
 @font-face {
-  font-family: "Inter";
-  src: url("../fonts/InterVariable.woff2") format("woff2");
-  font-weight: 100 900;
+  font-family: "Google Sans Code";
+  src: url("../fonts/GoogleSansCode-Variable.woff2") format("woff2");
+  font-weight: 300 800;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("../fonts/InterVariable-Italic.woff2") format("woff2");
-  font-weight: 100 900;
+  font-family: "Google Sans Code";
+  src: url("../fonts/GoogleSansCode-Italic-Variable.woff2") format("woff2");
+  font-weight: 300 800;
   font-style: italic;
   font-display: swap;
 }
 
-/* The CV is a document: always light, on screen and in print, so the PDF and
-   the page are the same artifact. */
+/* Theme tokens (blog.nuneslopes.org) — used only by the chrome around the
+   sheet. The CV document itself is always light: it is the printed page, and
+   the PDF must match it regardless of the visitor's theme. */
+:root,
+:root[data-theme="light"] {
+  --background: #fffaf6;
+  --foreground: #060503;
+  --accent: #aa0215;
+  --accent-foreground: #ffcf75;
+  --border: #ffdc98;
+}
+
+:root[data-theme="dark"] {
+  --background: #1a1a1a;
+  --foreground: #f5efe4;
+  --accent: #ff3737;
+  --accent-foreground: #1a1a1a;
+  --border: #6f5648;
+}
+
+/* Document palette: light-theme values, hardcoded on purpose */
+:root {
+  --doc-foreground: #060503;
+  --doc-accent: #aa0215;
+  --doc-muted: #54515b;
+  --doc-rule: #ffdc98;
+}
 
 * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  background: #eceef1;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 10.5pt;
-  line-height: 1.45;
-  color: #1a1d21;
+::selection {
+  background: color-mix(in srgb, var(--doc-accent) 75%, transparent);
+  color: #ffcf75;
 }
 
-/* Screen: an A4-proportioned sheet whose padding mirrors the @page margins,
-   so what you see is what the PDF paginates. */
+body {
+  margin: 0;
+  background: var(--background);
+  font-family: "Google Sans Code", "Courier New", monospace;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--doc-foreground);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
+}
+
+.site-title {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-title:hover { color: var(--accent); }
+
+.download-btn {
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--background);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: color-mix(in srgb, var(--accent) 85%, var(--foreground));
+}
+
+/* Screen: an A4-proportioned white sheet whose padding mirrors the @page
+   margins, so what you see is what the PDF paginates. */
 .page {
   max-width: 210mm;
-  margin: 2rem auto;
+  margin: 0 auto 2.5rem;
   padding: 18mm 16mm;
   background: #ffffff;
-  box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgb(0 0 0 / 8%);
 }
 
 h1 {
   margin: 0 0 0.2rem;
-  font-size: 21pt;
+  font-size: 19pt;
   font-weight: 700;
   letter-spacing: -0.015em;
 }
@@ -48,32 +111,31 @@ h1 {
 /* Contact line: the first paragraph after the name */
 h1 + p {
   margin: 0 0 1.4rem;
-  color: #5c6570;
-  font-size: 9.5pt;
+  color: var(--doc-muted);
+  font-size: 9pt;
 }
 
 h2 {
   margin: 1.6rem 0 0.7rem;
   font-size: 12pt;
-  font-weight: 650;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-bottom: 1px solid #d5d9de;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: var(--doc-accent);
+  border-bottom: 1px solid var(--doc-rule);
   padding-bottom: 0.25rem;
 }
 
 h3 {
   margin: 1rem 0 0.1rem;
-  font-size: 11pt;
+  font-size: 10.5pt;
   font-weight: 600;
 }
 
 /* Date/location line: the emphasized paragraph right after a job title */
-h3 + p > em:only-child,
 h3 + p em {
   font-style: normal;
-  color: #5c6570;
-  font-size: 9.5pt;
+  color: var(--doc-muted);
+  font-size: 9pt;
 }
 
 h3 + p {
@@ -89,45 +151,30 @@ ul {
 
 li { margin: 0.2rem 0; }
 
-a {
-  color: #0b62d6;
-  text-decoration: none;
+code {
+  font-family: inherit;
+  background: #fff3e0;
+  padding: 0 0.2em;
+  border-radius: 0.15em;
+  font-size: 0.95em;
 }
 
-a:hover { text-decoration: underline; }
+.page a {
+  color: var(--doc-accent);
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.page a:hover { text-decoration: underline dashed; }
 
 .entry { break-inside: avoid; }
-
-.download-btn {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.55rem 1.1rem;
-  background: #0b62d6;
-  color: #ffffff;
-  border-radius: 999px;
-  font-size: 10pt;
-  font-weight: 550;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
-}
-
-.download-btn:hover {
-  background: #0a56bc;
-  text-decoration: none;
-}
 
 @media (max-width: 700px) {
   .page {
     margin: 0;
-    padding: 10mm 6mm;
+    padding: 10mm 5mm;
+    border: none;
     box-shadow: none;
-  }
-
-  .download-btn {
-    position: static;
-    display: inline-block;
-    margin: 0.75rem;
   }
 }
 
@@ -144,12 +191,11 @@ a:hover { text-decoration: underline; }
     max-width: none;
     margin: 0;
     padding: 0;
+    border: none;
     box-shadow: none;
   }
 
   .no-print { display: none; }
 
   h1, h2, h3 { break-after: avoid; }
-
-  a { color: inherit; }
 }

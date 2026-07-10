@@ -5,9 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{title}} — CV</title>
   <link rel="stylesheet" href="styles/cv.css">
+  <script>
+    // FOUC prevention: set data-theme before first paint (same approach as the blog).
+    // Only the chrome around the sheet is themed; the CV itself is always light.
+    (function () {
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.firstElementChild.setAttribute("data-theme", stored ?? (prefersDark ? "dark" : "light"));
+    })();
+  </script>
 </head>
 <body>
-  <a href="cv.pdf" download class="download-btn no-print">Download PDF</a>
+  <header class="site-header no-print">
+    <a href="/" class="site-title">rodolfonuneslopes</a>
+    <a href="cv.pdf" download class="download-btn">Download PDF</a>
+  </header>
   <main class="page">
 {{content}}
   </main>

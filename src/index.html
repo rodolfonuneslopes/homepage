@@ -3,22 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rodolfo Nunes Lopes</title>
-  <meta name="description" content="Personal homepage of Rodolfo Nunes Lopes">
+  <title>rodolfonuneslopes</title>
+  <meta name="description" content="Rodolfo Nunes Lopes — personal homepage">
   <link rel="stylesheet" href="styles/site.css">
+  <script>
+    // FOUC prevention: set data-theme before first paint (same approach as the blog)
+    (function () {
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.firstElementChild.setAttribute("data-theme", stored ?? (prefersDark ? "dark" : "light"));
+    })();
+  </script>
 </head>
 <body>
-  <main class="card">
-    <h1>Rodolfo Nunes Lopes</h1>
-    <p class="tagline">Software engineer</p>
-    <nav>
-      <ul class="links">
-        <li><a href="https://www.linkedin.com/in/rodolfonuneslopes">LinkedIn</a></li>
-        <li><a href="https://github.com/rodolfonuneslopes">GitHub</a></li>
-        <li><a href="cv.html">Curriculum Vitae</a></li>
-        <li><a href="mailto:rodolfo@nuneslopes.org">Email</a></li>
-      </ul>
+  <header class="site-header">
+    <a href="/" class="site-title">rodolfonuneslopes</a>
+    <nav class="site-nav">
+      <button id="theme-btn" title="Toggle theme" aria-label="Toggle theme">
+        <svg class="icon-moon" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/></svg>
+        <svg class="icon-sun" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M14.828 14.828a4 4 0 1 0-5.656-5.656 4 4 0 0 0 5.656 5.656M6.343 17.657l-1.414 1.414M6.343 6.343 4.929 4.929M17.657 6.343l1.414-1.414M17.657 17.657l1.414 1.414M4 12H2M12 4V2M20 12h2M12 20v2"/></svg>
+      </button>
     </nav>
+  </header>
+
+  <main>
+    <section class="links">
+      <ul>
+        <li><a href="cv.html">curriculum vitae</a></li>
+        <li><a href="https://blog.nuneslopes.org">blog</a></li>
+        <li><a href="https://www.linkedin.com/in/rodolfonuneslopes">linkedin</a></li>
+        <li><a href="https://github.com/rodolfonuneslopes">github</a></li>
+        <li><a href="mailto:rodolfo@nuneslopes.org">email</a></li>
+      </ul>
+    </section>
   </main>
+
+  <script>
+    const btn = document.getElementById("theme-btn");
+    btn.addEventListener("click", () => {
+      const root = document.firstElementChild;
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    });
+  </script>
 </body>
 </html>
