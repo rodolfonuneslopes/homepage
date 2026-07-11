@@ -1,7 +1,9 @@
 import { resolve } from "node:path";
 import puppeteer from "puppeteer";
 
-const browser = await puppeteer.launch();
+const browser = await puppeteer.launch({
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+});
 const page = await browser.newPage();
 await page.goto(`file://${resolve("dist/cv.html")}`, { waitUntil: "networkidle0" });
 await page.evaluateHandle("document.fonts.ready");
