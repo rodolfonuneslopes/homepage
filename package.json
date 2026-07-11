@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "markdown-it": "^14.3.0",
-    "puppeteer": "^25.3.0"
+    "puppeteer": "^25.3.0",
+    "wrangler": "^4.110.0"
   }
 }
