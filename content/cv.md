@@ -28,7 +28,6 @@ It's my [personal blog](https://blog.nuneslopes.org) (implementation details in 
 2. Obsidian automatically pushes to the `blog-posts` [repository](https://github.com/rodolfonuneslopes/blog-posts)
 3. GitActions (using `rsync`) filter the files by `draft: false` and pushes to the `blog` [repository](https://github.com/rodolfonuneslopes/blog)
 4. The push triggers Vercel's Git integration to build and deploy the app with the new posts
-5. The [Gitbook page](https://rodolfonuneslopes.gitbook.io/blog-posts) of the `blog-posts` repository is also updated
 ## Experience
 ### Technical Consultant
 Bridge351 @ Cyberinspect (NOS SGPS) | February 2025 > present
